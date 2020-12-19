@@ -2,20 +2,37 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app>
       <v-list dense>
+        <v-list-item router :to="{ name: 'Home' }" exact>
+          <v-list-item-icon>
+            <v-icon>{{ "mdi-view-dashboard" }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item router :to="{ name: 'About' }" exact>
+          <v-list-item-icon>
+            <v-icon>{{ "mdi-forum" }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>About</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          link
           router
-          :to="{ name: item.name }"
+          :to="{
+            name: 'Users',
+            params: {
+              userId: 4321,
+            },
+          }"
           exact
         >
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>{{ "mdi-account-group-outline" }}</v-icon>
           </v-list-item-icon>
-
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>Users</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -27,7 +44,7 @@
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="ma-5">
       <router-view></router-view>
     </v-main>
   </v-app>
@@ -41,6 +58,7 @@ export default {
       items: [
         { title: "Home", icon: "mdi-view-dashboard", name: "Home" },
         { title: "About", icon: "mdi-forum", name: "About" },
+        { title: "Users", icon: "mdi-account-group-outline", name: "Users" },
       ],
       right: null,
     };
