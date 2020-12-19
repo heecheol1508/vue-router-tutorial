@@ -23,7 +23,11 @@
           :to="{
             name: 'Users',
             params: {
-              userId: 4321,
+              userId: 'heecheol',
+            },
+            query: {
+              group: 'member',
+              category: 'trial',
             },
           }"
           exact

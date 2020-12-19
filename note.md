@@ -139,7 +139,7 @@ export default router
 
 
 
-라우터 연결 방법들
+**라우터 연결 방법들**
 
 ```vue
 <template>
@@ -159,9 +159,56 @@ export default router
 
 
 
+
+
 라우터를 통해 값을 전달하는 방법들 중 route의 params 객체 안에 값들을 넣어서 전달하는 방법이 있다. 이렇게 params안에 값들을 넣어서 보낼수도있지만 router.js에 속성이름을 지정해줘서 (`path: "/userId/:userId"`) 주소창을 통해 값을 전달하는 방법도 있다. 
 
 메뉴를 눌러서 들어오는 경우라면 App.vue 등 메뉴에 파라메터 값을 넣어서 전달하는 방법이 의미가 있지만, 외부에서 들어오는 사용자의 경우 파라메터를 라우터에 전달해줄 수 있는 방법이 없어서 주소창을 통해야 한다.
+
+
+
+**parameter, 쿼리로 전달 & 받기**
+
+```vue
+// App.vue
+<template>
+    <v-list-item
+                 router
+                 :to="{
+                          name: 'Users',
+                          params: {
+                            userId: 'heecheol',
+                          },
+                          query: {
+                            group: 'member',
+                            category: 'trial',
+                          },
+                      }"
+                 exact
+                 >
+</template>
+```
+
+```vue
+// Users.vue
+<template>
+  <div>
+    <h1>Users</h1>
+    <h2>{{ $route.params }}</h2>  	// { "userId": "heecheol" }
+    <h2>{{ $route.query }}</h2>		// { "group": "member", "category": "trial" }
+  </div>
+</template>
+
+<script>
+export default {
+  computed: {
+    userId() {
+      return this.$route.params.userId;
+    },
+  },
+};
+</script>
+```
 
 
 
